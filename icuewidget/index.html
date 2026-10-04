@@ -58,17 +58,26 @@
 
         <!-- Bridge Connection Onboarding Card -->
         <div id="bridge-onboarding-card" class="bridge-onboarding-card" style="display: none;">
-          <div class="bridge-onboarding-header">
-            <svg class="bridge-info-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-            </svg>
-            <span>Bridge Connection Required</span>
+          <div class="bridge-onboarding-header" id="bridge-onboarding-header">
+            <div class="bridge-header-title">
+              <svg class="bridge-info-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+              </svg>
+              <span>Bridge Setup Guide</span>
+            </div>
+            <button id="btn-toggle-onboarding" class="bridge-toggle-btn" title="Toggle Setup Guide" aria-label="Toggle Setup Guide">
+              <svg id="onboarding-toggle-icon" class="bridge-toggle-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M19 13H5v-2h14v2z"/>
+              </svg>
+            </button>
           </div>
-          <p class="bridge-onboarding-text">
-            Run <code>icue-discord-bridge.exe</code> on your PC to connect iCUE to Discord.
-          </p>
-          <div class="bridge-onboarding-hint">
-            <span>💡 Copy <code>icue-discord-bridge.exe</code> into <code>shell:startup</code> for auto-boot.</span>
+          <div id="bridge-onboarding-body" class="bridge-onboarding-body">
+            <p class="bridge-onboarding-text">
+              Requires running <code>icue-discord-bridge.exe</code> to sync iCUE with Discord.
+            </p>
+            <a href="https://github.com/mcclana5/icue-discord-widget#quick-start--installation" target="_blank" rel="noopener noreferrer" class="bridge-guide-link">
+              📖 Quick Start & Setup Guide
+            </a>
           </div>
         </div>
       </div>

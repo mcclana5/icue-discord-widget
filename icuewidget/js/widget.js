@@ -36,6 +36,46 @@ import { initSettingsModal } from './components/settingsModal.js';
   const presetButtons = document.querySelectorAll('.preset-btn');
   const cardWidthSlider = document.getElementById('card-width-slider');
   const cardWidthValueBadge = document.getElementById('card-width-value');
+  const btnToggleOnboarding = document.getElementById('btn-toggle-onboarding');
+  const onboardingToggleIcon = document.getElementById('onboarding-toggle-icon');
+
+  function updateOnboardingState(minimized) {
+    if (!bridgeOnboardingCard) return;
+    if (minimized) {
+      bridgeOnboardingCard.classList.add('minimized');
+      if (onboardingToggleIcon) {
+        onboardingToggleIcon.innerHTML = '<path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>';
+      }
+    } else {
+      bridgeOnboardingCard.classList.remove('minimized');
+      if (onboardingToggleIcon) {
+        onboardingToggleIcon.innerHTML = '<path fill="currentColor" d="M19 13H5v-2h14v2z"/>';
+      }
+    }
+  }
+
+  let isOnboardingMinimized = localStorage.getItem('icue_onboarding_minimized') === 'true';
+  updateOnboardingState(isOnboardingMinimized);
+
+  if (btnToggleOnboarding) {
+    btnToggleOnboarding.addEventListener('click', (e) => {
+      e.stopPropagation();
+      isOnboardingMinimized = !isOnboardingMinimized;
+      localStorage.setItem('icue_onboarding_minimized', isOnboardingMinimized ? 'true' : 'false');
+      updateOnboardingState(isOnboardingMinimized);
+    });
+  }
+
+  if (bridgeOnboardingCard) {
+    bridgeOnboardingCard.addEventListener('click', (e) => {
+      if (e.target.closest('a')) return;
+      if (isOnboardingMinimized) {
+        isOnboardingMinimized = false;
+        localStorage.setItem('icue_onboarding_minimized', 'false');
+        updateOnboardingState(false);
+      }
+    });
+  }
 
   // Initialize Settings Modal & Settings Manager
   initSettingsModal(btnSettings, settingsModal, btnCloseSettings, scaleSlider, scaleValueBadge, presetButtons, cardWidthSlider, cardWidthValueBadge);

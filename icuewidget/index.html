@@ -75,9 +75,16 @@
             <p class="bridge-onboarding-text">
               Requires running <code>icue-discord-bridge.exe</code> to sync iCUE with Discord.
             </p>
-            <a href="https://github.com/mcclana5/icue-discord-widget#quick-start--installation" target="_blank" rel="noopener noreferrer" class="bridge-guide-link">
-              📖 Quick Start & Setup Guide
-            </a>
+            <div class="bridge-url-label">GitHub Setup Guide Link:</div>
+            <div class="bridge-url-box">
+              <input type="text" readonly id="bridge-url-input" class="bridge-url-input" value="https://github.com/mcclana5/icue-discord-widget#quick-start--installation" title="Click to copy GitHub Setup Guide URL" />
+              <button id="btn-copy-url" class="bridge-copy-btn" title="Copy GitHub Setup Guide Link">
+                <svg class="copy-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                </svg>
+                <span id="copy-btn-text">Copy Guide Link</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

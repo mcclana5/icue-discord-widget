@@ -504,12 +504,48 @@
     }
     if (bridgeOnboardingCard) {
       bridgeOnboardingCard.addEventListener("click", (e) => {
-        if (e.target.closest("a")) return;
+        if (e.target.closest(".bridge-url-box")) return;
         if (isOnboardingMinimized) {
           isOnboardingMinimized = false;
           localStorage.setItem("icue_onboarding_minimized", "false");
           updateOnboardingState(false);
         }
+      });
+    }
+    const bridgeUrlInput = document.getElementById("bridge-url-input");
+    const btnCopyUrl = document.getElementById("btn-copy-url");
+    const copyBtnText = document.getElementById("copy-btn-text");
+    function handleCopyUrl(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      if (!bridgeUrlInput) return;
+      bridgeUrlInput.select();
+      bridgeUrlInput.setSelectionRange(0, 9999);
+      let copied = false;
+      try {
+        copied = document.execCommand("copy");
+      } catch (_) {
+      }
+      if (!copied && navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(bridgeUrlInput.value).catch(() => {
+        });
+      }
+      if (btnCopyUrl && copyBtnText) {
+        copyBtnText.innerText = "Guide Link Copied! \u{1F4CB}";
+        btnCopyUrl.style.background = "var(--accent-green)";
+        setTimeout(() => {
+          copyBtnText.innerText = "Copy Guide Link";
+          btnCopyUrl.style.background = "";
+        }, 2500);
+      }
+    }
+    if (btnCopyUrl) btnCopyUrl.addEventListener("click", handleCopyUrl);
+    if (bridgeUrlInput) {
+      bridgeUrlInput.addEventListener("click", (e) => {
+        e.stopPropagation();
+        bridgeUrlInput.select();
       });
     }
     initSettingsModal(btnSettings, settingsModal, btnCloseSettings, scaleSlider, scaleValueBadge, presetButtons, cardWidthSlider, cardWidthValueBadge);

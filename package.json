@@ -1,0 +1,11 @@
+{
+  "name": "icue-discord-widget",
+  "version": "1.0.0",
+  "description": "Corsair iCUE 5 Discord Voice Overview Custom Widget & Bridge v2",
+  "scripts": {
+    "start": "node discord-bridge/index.js",
+    "dev": "node --watch discord-bridge/index.js",
+    "build": "npx esbuild icuewidget/js/widget.js --bundle --outfile=icuewidget/widget.js --format=iife && npx icuewidget-cli package icuewidget",
+    "package": "npx icuewidget-cli package icuewidget"
+  }
+}

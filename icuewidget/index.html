@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discord Voice Overview</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Header Bar -->
+  <header class="header" role="banner">
+    <div class="brand">
+      <svg class="discord-icon" viewBox="0 0 127.14 96.36" aria-hidden="true">
+        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a74.57,74.57,0,0,0,64.3,0c.87.69,1.76,1.37,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22c2.72-27.24-11.83-50.77-18.9-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.92,53.87,53,48.8,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.2,45.92,96.07,53,91,65.69,84.69,65.69Z"/>
+      </svg>
+      <span>Discord</span>
+    </div>
+    <div class="header-right">
+      <div class="status-badge" role="status" aria-live="polite">
+        <div id="status-dot" class="status-dot disconnected"></div>
+        <span id="status-text">Connecting...</span>
+        <img id="user-avatar" class="status-user-avatar" src="" alt="Avatar" style="display: none;" />
+      </div>
+      <button id="btn-settings" class="action-btn icon-only-btn header-settings-btn" title="Widget Settings" aria-label="Widget Settings">
+        <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.488.488 0 0 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main id="channel-container" class="channel-container">
+    <div id="channel-info" class="channel-info" style="display: none;">
+      <!-- Guild Header (Server Icon + Server Name above Voice Channel) -->
+      <div id="guild-row" class="guild-row" style="display: none;">
+        <img id="guild-icon" class="guild-icon" src="" alt="Server Icon" style="display: none;">
+        <span id="guild-name" class="guild-name">Discord Server</span>
+      </div>
+      <!-- Voice Channel Header -->
+      <div id="channel-title-row" class="channel-title-row">
+        <h1 id="channel-name" class="channel-name">Voice Channel</h1>
+        <span id="member-count" class="member-count-badge" style="display: none;">0</span>
+      </div>
+    </div>
+
+    <!-- Active Voice Members Grid -->
+    <div id="members-grid" class="members-grid" style="display: none;" role="list" aria-label="Voice Members"></div>
+
+    <!-- Empty / Idle State & Recent Channel Cards Grid -->
+    <div id="empty-state" class="empty-state">
+      <div id="recent-channels-grid" class="recent-channels-grid" style="display: none;"></div>
+      <div id="idle-status-wrap" class="idle-status-wrap">
+        <svg class="empty-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+        </svg>
+        <span id="empty-text">Connecting to local bridge...</span>
+
+        <!-- Bridge Connection Onboarding Card -->
+        <div id="bridge-onboarding-card" class="bridge-onboarding-card" style="display: none;">
+          <div class="bridge-onboarding-header">
+            <svg class="bridge-info-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+            </svg>
+            <span>Bridge Connection Required</span>
+          </div>
+          <p class="bridge-onboarding-text">
+            Run <code>icue-discord-bridge.exe</code> on your PC to connect iCUE to Discord.
+          </p>
+          <div class="bridge-onboarding-hint">
+            <span>💡 Copy <code>icue-discord-bridge.exe</code> into <code>shell:startup</code> for auto-boot.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Touch Action Controls Bar (Equal Width Mute, Deafen, Hang Up) -->
+  <nav id="controls-bar" class="controls-bar" role="toolbar" aria-label="Voice Controls" style="display: none;">
+    <button id="btn-mute" class="action-btn" aria-label="Mute Microphone">
+      <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a1 1 0 0 0-2 0 3 3 0 0 1-6 0 1 1 0 0 0-2 0 5 5 0 0 0 4 4.9V19H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2h-2v-3.1A5 5 0 0 0 17 11z"/>
+      </svg>
+      <span class="btn-label">Mute</span>
+    </button>
+    <button id="btn-deafen" class="action-btn" aria-label="Deafen Audio">
+      <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm3.7 12.3a1 1 0 0 1-1.4 1.4L12 13.4l-2.3 2.3a1 1 0 0 1-1.4-1.4l2.3-2.3-2.3-2.3a1 1 0 0 1 1.4-1.4l2.3 2.3 2.3-2.3a1 1 0 0 1 1.4 1.4L13.4 12z"/>
+      </svg>
+      <span class="btn-label">Deafen</span>
+    </button>
+    <button id="btn-disconnect" class="action-btn btn-hangup" title="Disconnect Voice" aria-label="Disconnect Voice" style="display: none;">
+      <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08c-.18-.17-.29-.42-.29-.7 0-.28.11-.53.29-.71C3.34 8.78 7.46 7 12 7s8.66 1.78 11.71 4.67c.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28-.79-.74-1.69-1.36-2.67-1.85-.33-.16-.56-.5-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z"/>
+      </svg>
+      <span class="btn-label">Hang Up</span>
+    </button>
+  </nav>
+
+  <!-- Settings Popup Modal -->
+  <div id="settings-modal" class="settings-modal" role="dialog" aria-label="Widget Settings Modal" style="display: none;">
+    <div class="settings-header">
+      <span>Widget Preferences</span>
+      <button id="btn-close-settings" class="close-btn" aria-label="Close Settings">✕</button>
+    </div>
+    <div class="settings-body">
+      <!-- Display Scale -->
+      <div class="setting-group">
+        <div class="slider-header">
+          <span>Display Scale</span>
+          <span id="scale-value" class="scale-badge">100%</span>
+        </div>
+        <input type="range" id="scale-slider" min="70" max="220" step="5" value="100" class="scale-slider" aria-label="UI Scale Slider" />
+        <div class="preset-buttons">
+          <button class="preset-btn" data-scale="100">100%</button>
+          <button class="preset-btn" data-scale="140">140%</button>
+          <button class="preset-btn" data-scale="180">180%</button>
+          <button class="preset-btn" data-scale="200">200%</button>
+        </div>
+      </div>
+
+      <!-- Recent Channel Card Width -->
+      <div class="setting-group" style="margin-top: calc(14px * var(--modal-scale, 1));">
+        <div class="slider-header">
+          <span>Card Width</span>
+          <span id="card-width-value" class="scale-badge">140px</span>
+        </div>
+        <input type="range" id="card-width-slider" min="100" max="260" step="5" value="140" class="scale-slider" aria-label="Recent Card Width Slider" />
+      </div>
+    </div>
+  </div>
+
+  <script src="widget.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+/**
+ * Standardized Client WebSocket Action Constants
+ */
+export const ACTIONS = Object.freeze({
+  TOGGLE_MUTE: 'TOGGLE_MUTE',
+  TOGGLE_DEAFEN: 'TOGGLE_DEAFEN',
+  LEAVE_VOICE: 'LEAVE_VOICE',
+  JOIN_RECENT_VOICE: 'JOIN_RECENT_VOICE',
+  REMOVE_RECENT_CHANNEL: 'REMOVE_RECENT_CHANNEL',
+  REFRESH: 'REFRESH'
+});

@@ -1,0 +1,24 @@
+{
+  "id": "com.user.discordcompanion",
+  "version": "2.0.0",
+  "name": "Discord Voice Overview",
+  "description": "Real-time Discord voice channel monitor, speaker glow, and touch mute controls for Xeneon Edge display.",
+  "author": "User",
+  "min_app_version": "5.47",
+  "min_framework_version": "1.0.0",
+  "os": [
+    { "platform": "windows" }
+  ],
+  "main": "index.html",
+  "interactive": true,
+  "icon": "icon.jpg",
+  "preview_icon": "icon.jpg",
+  "supported_devices": [
+    { "type": "dashboard_lcd" }
+  ],
+  "layouts": [
+    { "type": "small" },
+    { "type": "medium" },
+    { "type": "large" }
+  ]
+}

@@ -4,6 +4,14 @@ A custom **Corsair iCUE 5 Widget** and **Local RPC Bridge** built for Corsair di
 
 ---
 
+## 📸 Preview
+
+| Recent Channels / Quick Rejoin View | Active Voice Channel Monitor |
+| :---: | :---: |
+| ![Channel Selection](assets/icue-discord-channel-selection.png) | ![Active Voice Channel](assets/icue-discord-in-voice-channel.png) |
+
+---
+
 ## 🌟 Key Features
 
 - **Live Voice Participants Grid:** Real-time avatars, display names, and mute/deafen badges.
@@ -74,7 +82,9 @@ icue-discord-widget/
 ├── discord-voice-overview.icuewidget    <-- Widget package for iCUE
 ├── icue-discord-bridge.exe              <-- Standalone background bridge binary
 ├── assets/                              <-- Documentation images & screenshots
-│   └── discord-authorization.png        <-- First-time Discord OAuth authorization screenshot
+│   ├── discord-authorization.png        <-- First-time Discord OAuth authorization screenshot
+│   ├── icue-discord-channel-selection.png <-- Recent channels / selection screenshot
+│   └── icue-discord-in-voice-channel.png  <-- Active voice channel screenshot
 ├── icuewidget/                          <-- Frontend widget UI source (HTML/CSS/JS)
 ├── discord-bridge/                      <-- Backend bridge source (Node.js & Discord RPC)
 └── package.json                         <-- Build scripts & CLI dependencies

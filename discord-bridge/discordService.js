@@ -34,6 +34,17 @@ class DiscordService {
 
       try {
         await this.rpcClient.subscribe('VOICE_CHANNEL_SELECT');
+        await this.rpcClient.subscribe('VOICE_SETTINGS_UPDATE');
+
+        try {
+          const settings = await this.rpcClient.getVoiceSettings();
+          if (settings) {
+            stateManager.setSelfVoiceState(settings.mute, settings.deaf);
+          }
+        } catch (e) {
+          console.warn('[Discord RPC] Could not fetch initial voice settings:', e.message);
+        }
+
         await this.checkCurrentVoiceChannel();
       } catch (err) {
         console.error('[Discord RPC] Channel setup error:', err);
@@ -131,6 +142,15 @@ class DiscordService {
     this.rpcClient.on('VOICE_SETTINGS_UPDATE', (data) => {
       if (data) {
         stateManager.setSelfVoiceState(data.mute, data.deaf);
+
+        if (this.rpcClient.user && stateManager.state.voiceMembers.has(this.rpcClient.user.id)) {
+          const selfMember = stateManager.state.voiceMembers.get(this.rpcClient.user.id);
+          if (selfMember) {
+            selfMember.mute = !!data.mute;
+            selfMember.deafen = !!data.deaf;
+          }
+        }
+
         this.notifyState();
       }
     });

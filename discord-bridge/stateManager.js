@@ -88,8 +88,11 @@ class StateManager {
   updateMember(memberData) {
     if (!memberData || !memberData.user) return;
     const u = memberData.user;
-    const vs = memberData.voice_state || {};
-    
+    const vs = memberData.voice_state || memberData;
+
+    const isMuted = !!(vs.mute || vs.self_mute || memberData.mute || memberData.self_mute);
+    const isDeafened = !!(vs.deaf || vs.self_deaf || memberData.deaf || memberData.self_deaf);
+
     this.state.voiceMembers.set(u.id, {
       id: u.id,
       username: u.username,
@@ -97,9 +100,13 @@ class StateManager {
       avatar: u.avatar
         ? `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png`
         : 'https://cdn.discordapp.com/embed/avatars/0.png',
-      mute: vs.mute || vs.self_mute || memberData.mute || false,
-      deafen: vs.deaf || vs.self_deaf || false
+      mute: isMuted,
+      deafen: isDeafened
     });
+
+    if (this.state.currentUser && u.id === this.state.currentUser.id) {
+      this.setSelfVoiceState(isMuted, isDeafened);
+    }
   }
 
   removeMember(userId) {
